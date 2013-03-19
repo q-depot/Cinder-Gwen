@@ -63,7 +63,6 @@ void CustomControl::draw2d()
 	gl::popMatrices();
 }
 
-// FIXME: y-axis is flipped
 void CustomControl::draw3d()
 {
 	mCubeRotation.rotate( Vec3f( 1, 1, 1 ), 0.03f );
@@ -71,11 +70,11 @@ void CustomControl::draw3d()
 	Vec2f origin( cigwen::fromGwen( LocalPosToCanvas() ) );
 
 	Area viewport = gl::getViewport();
-	glViewport( origin.x, origin.y, m_InnerBounds.w, m_InnerBounds.h );
+	glViewport( origin.x, m_InnerBounds.h - origin.y, m_InnerBounds.w, m_InnerBounds.h );
 	gl::pushMatrices();
 	gl::enableDepthRead();
 
-	mCamera.lookAt( Vec3f( 1, 1, -3 ), Vec3f::zero() );
+	mCamera.lookAt( Vec3f( 1, 1, -3 ), Vec3f( 0, 0.8, 0 ) );
 	mCamera.setPerspective( 60, aspect, 1, 1000 );
 
 	gl::setMatrices( mCamera );
