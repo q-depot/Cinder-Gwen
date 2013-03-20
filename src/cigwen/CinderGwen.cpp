@@ -16,19 +16,18 @@ namespace Gwen { namespace Platform {
 
 	void SetCursor( unsigned char iCursor )
 	{
-		ci::app::console() << __PRETTY_FUNCTION__ << " | iCursor: " << (int) iCursor << std::endl;
 #if defined( CINDER_MAC )
 		switch( iCursor ) {
-			case Gwen::CursorType::Normal: [[NSCursor arrowCursor] set];	break;
-			case Gwen::CursorType::Beam: [[NSCursor IBeamCursor] set];	break;
-			case Gwen::CursorType::SizeNS: [[NSCursor resizeUpDownCursor] set];	break;
-			case Gwen::CursorType::SizeWE: [[NSCursor resizeLeftRightCursor] set];	break;
-			case Gwen::CursorType::SizeNWSE: [[NSCursor crosshairCursor] set];	break; // note: mac doesn't have one
-			case Gwen::CursorType::SizeNESW: [[NSCursor crosshairCursor] set];	break; // note: mac doesn't have one
-			case Gwen::CursorType::SizeAll: [[NSCursor crosshairCursor] set];	break;
-			case Gwen::CursorType::No: [[NSCursor arrowCursor] set];	break; // note: mac doesn't have one
-			case Gwen::CursorType::Wait: [[NSCursor arrowCursor] set];	break; // note: mac doesn't have one
-			case Gwen::CursorType::Finger: [[NSCursor pointingHandCursor] set];	break;
+			case Gwen::CursorType::Normal:		[[NSCursor arrowCursor] set];			break;
+			case Gwen::CursorType::Beam:		[[NSCursor IBeamCursor] set];			break;
+			case Gwen::CursorType::SizeNS:		[[NSCursor resizeUpDownCursor] set];	break;
+			case Gwen::CursorType::SizeWE:		[[NSCursor resizeLeftRightCursor] set];	break;
+			case Gwen::CursorType::SizeNWSE:	[[NSCursor crosshairCursor] set];		break; // note: mac doesn't have one
+			case Gwen::CursorType::SizeNESW:	[[NSCursor crosshairCursor] set];		break; // note: mac doesn't have one
+			case Gwen::CursorType::SizeAll:		[[NSCursor crosshairCursor] set];		break;
+			case Gwen::CursorType::No:			[[NSCursor arrowCursor] set];			break; // note: mac doesn't have one
+			case Gwen::CursorType::Wait:		[[NSCursor arrowCursor] set];			break; // note: mac doesn't have one
+			case Gwen::CursorType::Finger:		[[NSCursor pointingHandCursor] set];	break;
 			default: {
 				ci::app::console() << __PRETTY_FUNCTION__ << " | could not find iCursor: " << (int) iCursor << std::endl;
 				[[NSCursor arrowCursor] set];;
