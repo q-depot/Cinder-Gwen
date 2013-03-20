@@ -107,35 +107,6 @@
     <ResourceCompile Include="Resources.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\Button.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\Checkbox.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\CollapsibleList.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\ColorPicker.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\ComboBox.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\CrossSplitter.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\GroupBox.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\ImagePanel.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\Label.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\LabelMultiline.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\ListBox.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\MenuStrip.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\Numeric.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\PageControl.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\ProgressBar.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\Properties.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\RadioButton.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\ScrollControl.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\Slider.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\StatusBar.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\TabControl.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\TextBox.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\TreeControl.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\UnitTest.cpp" />
-    <ClCompile Include="..\..\..\gwen\gwen\UnitTest\Window.cpp" />
-    <ClCompile Include="..\src\GwenUnitTestApp.cpp" />
-    <ClCompile Include="..\..\..\src\cigwen\CinderGwen.cpp" />
-    <ClCompile Include="..\..\..\src\cigwen\GwenInput.cpp" />
-    <ClCompile Include="..\..\..\src\cigwen\GwenRendererGl.cpp" />
     <ClCompile Include="..\..\..\gwen\gwen\src\Anim.cpp" />
     <ClCompile Include="..\..\..\gwen\gwen\src\BaseRender.cpp" />
     <ClCompile Include="..\..\..\gwen\gwen\src\ControlList.cpp" />
@@ -147,6 +118,10 @@
     <ClCompile Include="..\..\..\gwen\gwen\src\Skin.cpp" />
     <ClCompile Include="..\..\..\gwen\gwen\src\ToolTip.cpp" />
     <ClCompile Include="..\..\..\gwen\gwen\src\Utility.cpp" />
+    <ClCompile Include="..\src\GwenUnitTestApp.cpp" />
+    <ClCompile Include="..\..\..\src\cigwen\CinderGwen.cpp" />
+    <ClCompile Include="..\..\..\src\cigwen\GwenInput.cpp" />
+    <ClCompile Include="..\..\..\src\cigwen\GwenRendererGl.cpp" />
     <ClCompile Include="..\..\..\gwen\gwen\src\Controls\Base.cpp" />
     <ClCompile Include="..\..\..\gwen\gwen\src\Controls\Button.cpp" />
     <ClCompile Include="..\..\..\gwen\gwen\src\Controls\Canvas.cpp" />
@@ -313,9 +288,6 @@
     <ClInclude Include="..\..\..\gwen\gwen\include\Gwen\Skins\Texturing.h" />
     <ClInclude Include="..\..\..\gwen\gwen\include\Gwen\Util\ControlFactory.h" />
     <ClInclude Include="..\..\..\gwen\gwen\include\Gwen\Util\ImportExport.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\..\..\gwen\gwen\UnitTest\ReadMe.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

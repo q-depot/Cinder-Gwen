@@ -16,7 +16,6 @@ lib/cinder*.lib
 *.ncb
 *.sdf
 *.opensdf
-*.filters
 Debug/
 Release/
 ipch/
