@@ -25,7 +25,7 @@ class CustomControlWindowApp : public AppNative, public Gwen::Event::Handler {
 
 private:
 	void addControls();
-	void buttonPressed();
+	void buttonPressed( Gwen::Controls::Base *button );
 
 	cigwen::GwenRendererGl *mRenderer;
 	cigwen::GwenInputRef mGwenInput;
@@ -75,13 +75,13 @@ void CustomControlWindowApp::addControls()
 	btn->AddAccelerator( "x" );
 }
 
-void CustomControlWindowApp::buttonPressed()
+void CustomControlWindowApp::buttonPressed( Gwen::Controls::Base* button )
 {
 	// FIXME: crash on windows..
-	//console() << "btn pressed" << endl;
-	//return;
+	console() << "button pressed" << endl;
+	return;
 
-	auto window = new Gwen::Controls::WindowControl( mCanvas );
+	auto window = new Gwen::Controls::WindowControl( mCanvas );  // .... or this throws a bad alloc
 	window->SetTitle( "This is CustomControl" );
 	window->SetSize( 300, 400 );
 	window->SetPos( randInt( 50, 450 ), randInt( 50, 250 ) );
