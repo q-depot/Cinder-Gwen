@@ -3,6 +3,7 @@
 #include "Gwen/Controls/Base.h"
 #include "cinder/Matrix44.h"
 #include "cinder/Camera.h"
+#include "cinder/gl/Texture.h"
 
 class CustomControl : public Gwen::Controls::Base {
 public:
@@ -19,4 +20,5 @@ private:
 
 	ci::Matrix44f		mCubeRotation;
 	ci::CameraPersp		mCamera;
+	ci::gl::Texture			mImageTex;
 };

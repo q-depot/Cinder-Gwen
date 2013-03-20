@@ -3,6 +3,7 @@
 #include "cinder/gl/gl.h"
 #include "cinder/Utilities.h"
 #include "cinder/app/App.h"
+#include "cinder/ImageIo.h"
 
 #include "cigwen/CinderGwen.h"
 
@@ -11,7 +12,9 @@ using namespace ci;
 
 CustomControl::CustomControl( Gwen::Controls::Base *parent )
 : Controls::Base( parent, "cigwen sample CustomControl" )
-{}
+{
+	mImageTex = loadImage( app::loadAsset( "gwen64.png" ) ); // gwen/assets should already be added to asset path during setup..
+}
 
 CustomControl::~CustomControl()
 {
@@ -68,7 +71,6 @@ void CustomControl::draw3d()
 	mCubeRotation.rotate( Vec3f( 1, 1, 1 ), 0.03f );
 	float aspect = (float)m_InnerBounds.w / (float)m_InnerBounds.h;
 	Vec2f origin( cigwen::fromGwen( LocalPosToCanvas() ) );
-
 	Area viewport = gl::getViewport();
 	glViewport( origin.x, m_InnerBounds.h - origin.y, m_InnerBounds.w, m_InnerBounds.h );
 	gl::pushMatrices();
@@ -80,9 +82,13 @@ void CustomControl::draw3d()
 	gl::setMatrices( mCamera );
 	gl::multModelView( mCubeRotation );
 
-	gl::color( ci::Color::white() );
-	gl::drawColorCube( Vec3f::zero(), Vec3f( 1.0f, 1.0f, 1.0f ) );
+	mImageTex.enableAndBind();
 
+	gl::color( ci::Color::white() );
+	gl::drawCube( Vec3f::zero(), Vec3f( 1.0f, 1.0f, 1.0f ) );
+
+	mImageTex.unbind();
+	
 	gl::disableDepthRead();
 	gl::popMatrices();
 	gl::setViewport( viewport );
