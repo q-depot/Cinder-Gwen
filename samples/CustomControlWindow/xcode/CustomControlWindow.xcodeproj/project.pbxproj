@@ -250,7 +250,7 @@
 		D389944E0A8C4DE086D4941F /* BaseRender.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = BaseRender.cpp; path = ../../../gwen/gwen/src/BaseRender.cpp; sourceTree = "<group>"; };
 		D3C4C576CA73448CAF1A88E8 /* Button.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Button.h; path = ../../../gwen/gwen/include/Gwen/Controls/Button.h; sourceTree = "<group>"; };
 		D498F20F3A8746698A539DA3 /* ToolTip.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = ToolTip.cpp; path = ../../../gwen/gwen/src/ToolTip.cpp; sourceTree = "<group>"; };
-		D49FEA6F6B3047369440E7F1 /* CinderGwen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = CinderGwen.cpp; path = ../../../src/cigwen/CinderGwen.cpp; sourceTree = "<group>"; };
+		D49FEA6F6B3047369440E7F1 /* CinderGwen.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = CinderGwen.cpp; path = ../../../src/cigwen/CinderGwen.cpp; sourceTree = "<group>"; };
 		D576C97207D34E68A57895C7 /* Menu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = ../../../gwen/gwen/include/Gwen/Controls/Menu.h; sourceTree = "<group>"; };
 		D5A6C5019D454086AFC369EB /* Modal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Modal.h; path = ../../../gwen/gwen/include/Gwen/Controls/Modal.h; sourceTree = "<group>"; };
 		D62A3AF7F4C843699C265497 /* RichLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RichLabel.h; path = ../../../gwen/gwen/include/Gwen/Controls/RichLabel.h; sourceTree = "<group>"; };

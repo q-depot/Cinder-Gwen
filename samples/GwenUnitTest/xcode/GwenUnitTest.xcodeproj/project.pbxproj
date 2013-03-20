@@ -250,7 +250,7 @@
 		80A1035934A74074B6F32B51 /* ImportExport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImportExport.h; path = ../../../gwen/gwen/include/Gwen/Util/ImportExport.h; sourceTree = "<group>"; };
 		81ADDC2304D3455A9FDB6AE7 /* ImagePanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = ImagePanel.cpp; path = ../../../gwen/gwen/src/Controls/ImagePanel.cpp; sourceTree = "<group>"; };
 		822DC3F38B274BBAA677D721 /* MenuItem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = MenuItem.cpp; path = ../../../gwen/gwen/src/Controls/MenuItem.cpp; sourceTree = "<group>"; };
-		823C09756760470ABE184868 /* CinderGwen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = CinderGwen.cpp; path = ../../../src/cigwen/CinderGwen.cpp; sourceTree = "<group>"; };
+		823C09756760470ABE184868 /* CinderGwen.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = CinderGwen.cpp; path = ../../../src/cigwen/CinderGwen.cpp; sourceTree = "<group>"; };
 		8622DDD0B6A14AF1AD08DBDA /* Texturing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Texturing.h; path = ../../../gwen/gwen/include/Gwen/Skins/Texturing.h; sourceTree = "<group>"; };
 		8A6150AB136C47F8ADC4361E /* PropertyTree.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = PropertyTree.cpp; path = ../../../gwen/gwen/src/Controls/PropertyTree.cpp; sourceTree = "<group>"; };
 		8A6C18F397C5486581A00A75 /* ColorControls.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = ColorControls.cpp; path = ../../../gwen/gwen/src/Controls/ColorControls.cpp; sourceTree = "<group>"; };

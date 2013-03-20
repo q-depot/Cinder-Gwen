@@ -4,22 +4,45 @@
 #include "cinder/app/Window.h"
 #include "cinder/Utilities.h"
 
+
+
 //! Implement platform-specific methods declared in the Gwen::Platform namespace
 namespace Gwen { namespace Platform {
 
 	void Sleep( unsigned int iMS )
 	{
-		ci::sleep( static_cast<float>( iMS ) );
+//		ci::sleep( static_cast<float>( iMS ) ); // FIXME: cinder/Utilities.h is causing this to break
 	}
 
 	void SetCursor( unsigned char iCursor )
 	{
-		// TODO: NSCursor for mac, look at Gwen/Platform/Windows.cpp for win
+		ci::app::console() << __PRETTY_FUNCTION__ << " | iCursor: " << (int) iCursor << std::endl;
+#if defined( CINDER_MAC )
+		switch( iCursor ) {
+			case Gwen::CursorType::Normal: [[NSCursor arrowCursor] set];	break;
+			case Gwen::CursorType::Beam: [[NSCursor IBeamCursor] set];	break;
+			case Gwen::CursorType::SizeNS: [[NSCursor resizeUpDownCursor] set];	break;
+			case Gwen::CursorType::SizeWE: [[NSCursor resizeLeftRightCursor] set];	break;
+			case Gwen::CursorType::SizeNWSE: [[NSCursor crosshairCursor] set];	break; // note: mac doesn't have one
+			case Gwen::CursorType::SizeNESW: [[NSCursor crosshairCursor] set];	break; // note: mac doesn't have one
+			case Gwen::CursorType::SizeAll: [[NSCursor crosshairCursor] set];	break;
+			case Gwen::CursorType::No: [[NSCursor arrowCursor] set];	break; // note: mac doesn't have one
+			case Gwen::CursorType::Wait: [[NSCursor arrowCursor] set];	break; // note: mac doesn't have one
+			case Gwen::CursorType::Finger: [[NSCursor pointingHandCursor] set];	break;
+			default: {
+				ci::app::console() << __PRETTY_FUNCTION__ << " | could not find iCursor: " << (int) iCursor << std::endl;
+				[[NSCursor arrowCursor] set];;
+			}
+		}
+#else
+		// TODO: windows is already done in gwen's Windows.cpp
+#endif
 	}
 
 	void GetCursorPos( Gwen::Point & p )
 	{
 		// TODO: is there a cinder specific way to get this, without tying into GwenInput?
+		
 	}
 
 	void GetDesktopSize( int & w, int & h )
