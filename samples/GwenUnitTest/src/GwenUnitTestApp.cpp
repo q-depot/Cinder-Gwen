@@ -34,9 +34,14 @@ void GwenUnitTestApp::setup()
 {
 	getWindow()->setTitle( "Gwen UnitTest" );
 
-	// TODO: map this to other systems or find a better way..
-	fs::path gwenBinPath = getAppPath().parent_path().parent_path().parent_path().parent_path().parent_path().parent_path() / "gwen" / "gwen" / "bin";
-	addAssetDirectory( gwenBinPath );
+	// TODO: find a better way..
+#if defined( CINDER_COCOA )
+	fs::path gwenBinPath = getAppPath().parent_path().parent_path().parent_path().parent_path().parent_path().parent_path();
+#else
+	fs::path gwenBinPath = getAppPath().parent_path().parent_path().parent_path().parent_path().parent_path();
+#endif
+
+	addAssetDirectory( gwenBinPath  / "gwen" / "gwen" / "bin" );
 
 	mRenderer = new cigwen::GwenRendererGl();
 	mRenderer->Init();
