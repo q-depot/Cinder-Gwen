@@ -12,7 +12,14 @@
 	>
 
 	<headerPattern>src/cigwen/*.h</headerPattern>
-	<sourcePattern>src/cigwen/*.cpp</sourcePattern>
+	<source>src/cigwen/GwenRendererGl.cpp</source>
+	<source>src/cigwen/GwenInput.cpp</source>
+	<platform os="macosx">
+		<source compileAs="mm">src/cigwen/CinderGwen.cpp</source>
+	</platform>
+	<platform os="msw">
+		<source>src/cigwen/CinderGwen.cpp</source>
+	</platform>
 
 	<headerPattern>gwen/gwen/include/Gwen/*</headerPattern>
 	<headerPattern>gwen/gwen/include/Gwen/Controls/*</headerPattern>
