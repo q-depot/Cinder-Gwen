@@ -27,7 +27,6 @@ namespace cigwen {
 		void mouseWheel( ci::app::MouseEvent &event );
 		void keyDown( ci::app::KeyEvent &event );
 		void keyUp( ci::app::KeyEvent &event );
-		void resize();
 
 	protected:
 		GwenInput( Gwen::Controls::Canvas *canvas );

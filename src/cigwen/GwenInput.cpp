@@ -19,7 +19,6 @@ namespace cigwen {
 		window->connectMouseWheel( &GwenInput::mouseWheel, this );
 		window->connectKeyDown( &GwenInput::keyDown, this );
 		window->connectKeyUp( &GwenInput::keyUp, this );
-		window->connectResize( &GwenInput::resize, this );
 	}
 
 	void GwenInput::mouseDown( app::MouseEvent &event )
@@ -74,11 +73,6 @@ namespace cigwen {
 			event.setHandled();
 			return;
 		}
-	}
-
-	void GwenInput::resize()
-	{
-		mCanvas->SetSize( app::getWindowWidth(), app::getWindowHeight() );
 	}
 
 	int GwenInput::mapToGwen( const app::KeyEvent &event ) const
