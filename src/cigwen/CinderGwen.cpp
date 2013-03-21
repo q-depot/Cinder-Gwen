@@ -3,7 +3,6 @@
 #include "cinder/app/App.h"
 #include "cinder/app/Window.h"
 
-#include "cinder/Utilities.h"
 // FIXME: Utilities.h cannot be included with Boost 1.53
 namespace cinder {
 	void sleep( float milliseconds );
