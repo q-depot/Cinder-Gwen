@@ -2,16 +2,19 @@
 
 #include "cinder/app/App.h"
 #include "cinder/app/Window.h"
+
 #include "cinder/Utilities.h"
-
-
+// FIXME: Utilities.h cannot be included with Boost 1.53
+namespace cinder {
+	void sleep( float milliseconds );
+}
 
 //! Implement platform-specific methods declared in the Gwen::Platform namespace
 namespace Gwen { namespace Platform {
 
 	void Sleep( unsigned int iMS )
 	{
-//		ci::sleep( static_cast<float>( iMS ) ); // FIXME: cinder/Utilities.h is causing this to break
+		ci::sleep( static_cast<float>( iMS ) ); // FIXME: cinder/Utilities.h is causing this to break
 	}
 
 	void SetCursor( unsigned char iCursor )
