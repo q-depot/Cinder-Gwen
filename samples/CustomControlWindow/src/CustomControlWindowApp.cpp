@@ -17,19 +17,22 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-class CustomControlWindowApp : public AppNative, public Gwen::Event::Handler {
+class CustomControlWindowApp : public AppNative {
   public:
 	void prepareSettings( Settings *settings );
 	void setup();
 	void draw();
 
+	void buttonPressed( Gwen::Controls::Button *button );
+
 private:
 	void addControls();
-	void buttonPressed( Gwen::Controls::Base *button );
 
 	cigwen::GwenRendererGl *mRenderer;
 	cigwen::GwenInputRef mGwenInput;
 	Gwen::Controls::Canvas *mCanvas;
+
+	cigwen::ControlCallback<Gwen::Controls::Button> mButtonCallback;
 };
 
 void CustomControlWindowApp::prepareSettings( Settings *settings )
@@ -59,7 +62,7 @@ void CustomControlWindowApp::setup()
 	mCanvas = new Gwen::Controls::Canvas( skin );
 	mCanvas->SetSize( 998, 650 - 24 );
 	mCanvas->SetDrawBackground( true );
-	mCanvas->SetBackgroundColor( cigwen::toGwen( Color::gray( 0.2 ) ) );
+	mCanvas->SetBackgroundColor( cigwen::toGwen( Color::gray( 0.2f ) ) );
 
 	mGwenInput = cigwen::GwenInput::create( mCanvas );
 
@@ -70,18 +73,18 @@ void CustomControlWindowApp::addControls()
 {
 	Gwen::Controls::Button *btn = new Gwen::Controls::Button( mCanvas );
 	btn->SetBounds( getWindowCenter().x - 40, getWindowCenter().y - 20, 80, 40 );
-	btn->SetText( "Click Me" );
-	btn->onPress.Add( this, &CustomControlWindowApp::buttonPressed );
-	btn->AddAccelerator( "x" );
+	btn->SetText( L"Click Me" );
+	btn->AddAccelerator( L"x" );
+
+	//btn->onPress.Add( this, &CustomControlWindowApp::buttonPressed ); // NOTE: you could do this too, but be careful with multiple inheritance
+	mButtonCallback.setCallback( btn, bind( &CustomControlWindowApp::buttonPressed, this, std::_1 ) );
 }
 
-void CustomControlWindowApp::buttonPressed( Gwen::Controls::Base* button )
+void CustomControlWindowApp::buttonPressed( Gwen::Controls::Button* button )
 {
-	// FIXME: crash on windows..
 	console() << "button pressed" << endl;
-	return;
 
-	auto window = new Gwen::Controls::WindowControl( mCanvas );  // .... or this throws a bad alloc
+	auto window = new Gwen::Controls::WindowControl( mCanvas );
 	window->SetTitle( "This is CustomControl" );
 	window->SetSize( 300, 400 );
 	window->SetPos( randInt( 50, 450 ), randInt( 50, 250 ) );
