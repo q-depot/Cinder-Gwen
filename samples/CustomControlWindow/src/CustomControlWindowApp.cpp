@@ -33,6 +33,7 @@ private:
 	Gwen::Controls::Canvas *mCanvas;
 
 	cigwen::ControlCallback<Gwen::Controls::Button> mButtonCallback;
+	cigwen::ControlCallback<Gwen::Controls::Button> mButtonCallback2;
 };
 
 void CustomControlWindowApp::prepareSettings( Settings *settings )
@@ -73,11 +74,22 @@ void CustomControlWindowApp::addControls()
 {
 	Gwen::Controls::Button *btn = new Gwen::Controls::Button( mCanvas );
 	btn->SetBounds( getWindowCenter().x - 40, getWindowCenter().y - 20, 80, 40 );
-	btn->SetText( L"Click Me" );
-	btn->AddAccelerator( L"x" );
+	btn->SetText( "Click Me" );
+	btn->AddAccelerator( "x" );
+
+	Gwen::Controls::Button *btn2 = new Gwen::Controls::Button( mCanvas );
+	//btn->SetBounds( getWindowCenter().x - 40, getWindowCenter().y - 20, 80, 40 );
+	btn2->SetBounds( btn->X(), btn->Bottom() + 10, 80, 40 );
+	btn2->SetText( "Me too" );
+	btn2->AddAccelerator( "c" );
 
 	//btn->onPress.Add( this, &CustomControlWindowApp::buttonPressed ); // NOTE: you could do this too, but be careful with multiple inheritance
-	mButtonCallback.setCallback( btn, bind( &CustomControlWindowApp::buttonPressed, this, std::_1 ) );
+	mButtonCallback.set( btn, bind( &CustomControlWindowApp::buttonPressed, this, std::_1 ) );
+	mButtonCallback2.set( btn2, [&] ( Gwen::Controls::Button *ctl ) {
+		//btn2->SetText( "Thanks!" ); // ???: down she blows.. btn2 has been invalidated, but it should be here by reference..
+		ctl->SetText( "Thanks!" );  // .. but this one works
+		console() << "btn2 onPress callback" << endl;
+	} );
 }
 
 void CustomControlWindowApp::buttonPressed( Gwen::Controls::Button* button )
