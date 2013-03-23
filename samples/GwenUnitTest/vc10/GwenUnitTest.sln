@@ -1,6 +1,11 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C++ Express 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GwenUnitTest", "GwenUnitTest.vcxproj", "{DBE9102A-C5E4-428D-9FB1-178F51527235}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BC81D55A-5269-4F4A-97E6-8FA52E2DD1A4} = {BC81D55A-5269-4F4A-97E6-8FA52E2DD1A4}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest", "UnitTest.vcxproj", "{BC81D55A-5269-4F4A-97E6-8FA52E2DD1A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,6 +17,10 @@ Global
 		{DBE9102A-C5E4-428D-9FB1-178F51527235}.Debug|Win32.Build.0 = Debug|Win32
 		{DBE9102A-C5E4-428D-9FB1-178F51527235}.Release|Win32.ActiveCfg = Release|Win32
 		{DBE9102A-C5E4-428D-9FB1-178F51527235}.Release|Win32.Build.0 = Release|Win32
+		{BC81D55A-5269-4F4A-97E6-8FA52E2DD1A4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BC81D55A-5269-4F4A-97E6-8FA52E2DD1A4}.Debug|Win32.Build.0 = Debug|Win32
+		{BC81D55A-5269-4F4A-97E6-8FA52E2DD1A4}.Release|Win32.ActiveCfg = Release|Win32
+		{BC81D55A-5269-4F4A-97E6-8FA52E2DD1A4}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
