@@ -18,16 +18,26 @@ namespace cigwen {
 	inline ci::Rectf fromGwen( const Gwen::Rect &r )	{ return ci::Rectf( r.x, r.y, r.x + r.w, r.y + r.h ); }
 
 	//! Helper class that maintains a std::function callback for a Gwen control
-	// \note ControlT should be of type Gwen::Controls::Base
-	template <typename ControlT>
 	struct ControlCallback : public Gwen::Event::Handler {
-		typedef std::function<void ( ControlT *control  )> Callback;
+		typedef std::function<void ()> Callback;
+		typedef std::function<void ( Gwen::Controls::Base *control  )> ParamCallback;
 
-		// TODO: this should not just be for type onPress, but for all Gwen::Event::Caller's
-		void set( ControlT *control, Callback cb )	{ control->onPress.Add( this, &ControlCallback::onPressed ); mCallback = cb; }
-		void onPressed( Gwen::Controls::Base *control )	{ mCallback( static_cast<ControlT *>( control ) ); }
+		ControlCallback() {}
+		ControlCallback( Gwen::Event::Caller *caller, Callback cb )			{ set( caller, cb ); }
+		ControlCallback( Gwen::Event::Caller *caller, ParamCallback cb )	{ set( caller, cb ); }
+
+		void set( Gwen::Event::Caller *caller, Callback cb )		{ caller->Add( this, &ControlCallback::onEvent ); mCallback = cb; }
+		void set( Gwen::Event::Caller *caller, ParamCallback cb )	{ caller->Add( this, &ControlCallback::onEventWithParam ); mParamCallback = cb; }
+
+		void onEvent()			{
+			mCallback();
+		}
+		void onEventWithParam( Gwen::Controls::Base *control )	{
+			mParamCallback( control );
+		}
 	private:
 		Callback mCallback;
+		ParamCallback mParamCallback;
 	};
 
 } // namespace cigwen
