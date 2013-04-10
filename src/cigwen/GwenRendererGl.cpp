@@ -167,8 +167,13 @@ namespace cigwen {
 	Gwen::Point GwenRendererGl::MeasureText( Gwen::Font* font, const Gwen::UnicodeString & text )
 	{
 		std::string str = static_cast<std::string>( Gwen::Utility::UnicodeToString( text ) );
-		Vec2f size = getTextureFont( font )->measureString( str );
 
+#if defined( CINDER_MSW )
+		// workaround for TextureFont measuring a space on windows (currently reports {0,0} because space isn't a glyph
+		if( str == " " )
+			str = "A";
+#endif
+		Vec2f size = getTextureFont( font )->measureString( str ) * Scale();
 		return Gwen::Point( size.x, size.y );
 	}
 
@@ -179,7 +184,6 @@ namespace cigwen {
 //		auto fontIt = mFontMap.find( fontType );
 //		if( fontIt == mFontMap.end() ) {
 //			LOG_V << "\tcreating font" << std::endl;
-//			// TODO: check fontface exists first, or use system default and print error
 //			mFontMap.insert( std::make_pair( fontType, gl::TextureFont::create( ci::Font( fontType.first, fontType.second ) ) ) );
 //		} else {
 //			LOG_V << "\talready exists." << std::endl;
