@@ -157,12 +157,11 @@ namespace cigwen {
 
 		std::string str = static_cast<std::string>( Gwen::Utility::UnicodeToString( text ) );
 		gl::TextureFontRef texFont = getTextureFont( font );
-		float scale = Scale();
-
-		// TODO: account for scale
+		gl::TextureFont::DrawOptions drawOptions;
+		drawOptions.scale( Scale() );
 
 		Translate( pos.x, pos.y );
-		texFont->drawString( str, Vec2f( pos.x, pos.y + texFont->getFont().getSize() - texFont->getDescent() ) );
+		texFont->drawString( str, Vec2f( pos.x, pos.y + texFont->getFont().getSize() - texFont->getDescent() ), drawOptions );
 	}
 
 	Gwen::Point GwenRendererGl::MeasureText( Gwen::Font* font, const Gwen::UnicodeString & text )
