@@ -192,17 +192,24 @@ namespace cigwen {
 	{
 		std::string name = Gwen::Utility::UnicodeToString( font->facename );
 		int size = static_cast<int>( roundFloat( font->size ) );
+#if defined( CINDER_MSW )
+		// FIXME: test is much, much smaller on windows, for whatever cinder gdiplus impl reason, so I'm hard scaling up here.
+		size *= 1.3;
+#endif
 		std::string fontKey =  name + std::string( "-" ) + ci::toString( size );
 		auto fontIt = mFontMap.find( fontKey );
 		if( fontIt == mFontMap.end() ) {
+			ci::Font cinderFont;
 			try {
-				ci::Font cinderFont( name, size );
-				mFontMap.insert( std::make_pair( fontKey, gl::TextureFont::create( cinderFont ) ) );
+				cinderFont = ci::Font( name, size );
 			}
 			catch( FontInvalidNameExc& exc ) {
 				app::console() << "GwenRendererGl::getTextureFont cannot find font named: " << name << ". replacing with system default." << std::endl;
-				mFontMap.insert( std::make_pair( fontKey, gl::TextureFont::create( ci::Font::getDefault() ) ) );
+				cinderFont = ci::Font::getDefault();
 			}
+			gl::TextureFont::Format format;
+			format.enableMipmapping();
+			mFontMap.insert( std::make_pair( fontKey, gl::TextureFont::create( cinderFont, format ) ) );
 		}
 		return mFontMap[fontKey];
 	}
