@@ -161,7 +161,9 @@ namespace cigwen {
 		drawOptions.scale( Scale() );
 
 		Translate( pos.x, pos.y );
+		gl::enableAlphaBlending( true );
 		texFont->drawString( str, Vec2f( pos.x, pos.y + texFont->getFont().getSize() - texFont->getDescent() ), drawOptions );
+		gl::enableAlphaBlending();
 	}
 
 	Gwen::Point GwenRendererGl::MeasureText( Gwen::Font* font, const Gwen::UnicodeString & text )
@@ -197,7 +199,7 @@ namespace cigwen {
 		int size = static_cast<int>( roundFloat( font->size ) );
 #if defined( CINDER_MSW )
 		// FIXME: test is much, much smaller on windows, for whatever cinder gdiplus impl reason, so I'm hard scaling up here.
-		size *= 1.3;
+		size *= 1.1;
 #endif
 		std::string fontKey =  name + std::string( "-" ) + ci::toString( size );
 		auto fontIt = mFontMap.find( fontKey );
@@ -211,7 +213,7 @@ namespace cigwen {
 				cinderFont = ci::Font::getDefault();
 			}
 			gl::TextureFont::Format format;
-			format.enableMipmapping();
+			format.enableMipmapping().premultiply();
 			mFontMap.insert( std::make_pair( fontKey, gl::TextureFont::create( cinderFont, format ) ) );
 		}
 		return mFontMap[fontKey];
