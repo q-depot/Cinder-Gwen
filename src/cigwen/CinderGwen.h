@@ -22,15 +22,12 @@ namespace cigwen {
 		ControlCallback( Gwen::Event::Caller *caller, Callback cb )			{ set( caller, cb ); }
 		ControlCallback( Gwen::Event::Caller *caller, ParamCallback cb )	{ set( caller, cb ); }
 
-		void set( Gwen::Event::Caller *caller, Callback cb )		{ caller->Add( this, &ControlCallback::onEvent ); mCallback = cb; }
-		void set( Gwen::Event::Caller *caller, ParamCallback cb )	{ caller->Add( this, &ControlCallback::onEventWithParam ); mParamCallback = cb; }
+		void set( Gwen::Event::Caller *caller, Callback cb );
+		void set( Gwen::Event::Caller *caller, ParamCallback cb );
 
-		void onEvent()			{
-			mCallback();
-		}
-		void onEventWithParam( Gwen::Controls::Base *control )	{
-			mParamCallback( control );
-		}
+		void onEvent();
+		void onEventWithParam( Gwen::Controls::Base *control );
+
 	private:
 		Callback mCallback;
 		ParamCallback mParamCallback;

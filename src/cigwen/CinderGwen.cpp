@@ -8,6 +8,29 @@ using namespace std;
 
 namespace cigwen {
 
+	void ControlCallback::set( Gwen::Event::Caller *caller, Callback cb )
+	{
+		caller->Add( this, &ControlCallback::onEvent );
+		mCallback = cb;
+	}
+
+	void ControlCallback::set( Gwen::Event::Caller *caller, ParamCallback cb )
+	{
+		caller->Add( this, &ControlCallback::onEventWithParam );
+		mParamCallback = cb;
+	}
+
+	void ControlCallback::onEvent()
+	{
+		mCallback();
+	}
+
+	void ControlCallback::onEventWithParam( Gwen::Controls::Base *control )
+	{
+		mParamCallback( control );
+	}
+	
+
 	GwenInterface::GwenInterface( ci::DataSourceRef skinSource, ci::ColorA backgroundColor )
 	{
 		mRenderer = new cigwen::GwenRendererGl();

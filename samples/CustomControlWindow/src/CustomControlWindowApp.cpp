@@ -63,15 +63,21 @@ void CustomControlWindowApp::setup()
 	// ???: ambiguous?
 	//	mGwenInterface->addCallback( &btn->onPress, bind( &CustomControlWindowApp::buttonPressed, this ) );
 
+//	mGwenInterface->addCallback( &btn2->onPress, [&] ( Gwen::Controls::Base *ctl ) {
+//		dynamic_cast<Gwen::Controls::Button *>( ctl )->SetText( "Thanks!" );
+//		console() << "btn2 onPress callback" << endl;
+//	} );
+
 	mGwenInterface->addCallback( &btn->onPress, [&] {
  		console() << "btn onPress callback" << endl;
 	} );
 
 	// FIXME: adding this blocks the first callback
-	mGwenInterface->addCallback( &btn2->onPress, [&] ( Gwen::Controls::Base *ctl ) {
-		dynamic_cast<Gwen::Controls::Button *>( ctl )->SetText( "Thanks!" );
-		console() << "btn2 onPress callback" << endl;
+	mGwenInterface->addCallback( &btn2->onPress, [&] {
+ 		console() << "btn2 onPress callback" << endl;
+		buttonPressed();
 	} );
+
 }
 
 void CustomControlWindowApp::buttonPressed()
