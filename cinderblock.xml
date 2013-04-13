@@ -36,6 +36,6 @@
 	<includePath>src</includePath>
 	<includePath>gwen/gwen/include</includePath>
 
-	<asset>assets/DefaultSkin.png</asset>
+	<resource name="RES_DEFAULT_SKIN" type="IMAGE">assets/DefaultSkin.png</resource>
 </block>
 </cinder>
