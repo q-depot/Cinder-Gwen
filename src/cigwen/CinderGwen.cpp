@@ -1,118 +1,39 @@
-#include "Gwen/Platform.h"
+#include "cigwen/CinderGwen.h"
+#include "cigwen/GwenInput.h"
+#include "cigwen/GwenRendererGl.h"
 
-#include "cinder/app/App.h"
-#include "cinder/app/Window.h"
-#include "cinder/Utilities.h"
+#include "Gwen/Skins/TexturedBase.h"
 
-//! Implement platform-specific methods declared in the Gwen::Platform namespace
-namespace Gwen { namespace Platform {
+using namespace std;
 
-	void Sleep( unsigned int iMS )
+namespace cigwen {
+
+	GwenInterface::GwenInterface( ci::DataSourceRef skinSource, ci::ColorA backgroundColor )
 	{
-		ci::sleep( static_cast<float>( iMS ) );
-	}
+		mRenderer = new cigwen::GwenRendererGl();
+		mRenderer->Init();
 
-	void SetCursor( unsigned char iCursor )
-	{
-#if defined( CINDER_MAC )
-		switch( iCursor ) {
-			case Gwen::CursorType::Normal:		[[NSCursor arrowCursor] set];			break;
-			case Gwen::CursorType::Beam:		[[NSCursor IBeamCursor] set];			break;
-			case Gwen::CursorType::SizeNS:		[[NSCursor resizeUpDownCursor] set];	break;
-			case Gwen::CursorType::SizeWE:		[[NSCursor resizeLeftRightCursor] set];	break;
-			case Gwen::CursorType::SizeNWSE:	[[NSCursor crosshairCursor] set];		break; // note: mac doesn't have one
-			case Gwen::CursorType::SizeNESW:	[[NSCursor crosshairCursor] set];		break; // note: mac doesn't have one
-			case Gwen::CursorType::SizeAll:		[[NSCursor crosshairCursor] set];		break;
-			case Gwen::CursorType::No:			[[NSCursor arrowCursor] set];			break; // note: mac doesn't have one
-			case Gwen::CursorType::Wait:		[[NSCursor arrowCursor] set];			break; // note: mac doesn't have one
-			case Gwen::CursorType::Finger:		[[NSCursor pointingHandCursor] set];	break;
-			default: {
-				ci::app::console() << __PRETTY_FUNCTION__ << " | could not find iCursor: " << (int) iCursor << std::endl;
-				[[NSCursor arrowCursor] set];;
-			}
+		Gwen::Skin::TexturedBase* skin = new Gwen::Skin::TexturedBase( mRenderer );
+		skin->Init( skinSource->getFilePath().string() );
+
+		mCanvas = new Gwen::Controls::Canvas( skin );
+		if( backgroundColor != ci::ColorA::zero() ) {
+			mCanvas->SetDrawBackground( true );
+			mCanvas->SetBackgroundColor( toGwen( backgroundColor ) );
 		}
-#else
-		// TODO: windows is already done in gwen's Windows.cpp
-#endif
+		mGwenInput = cigwen::GwenInput::create( mCanvas );
 	}
 
-	void GetCursorPos( Gwen::Point & p )
+	void GwenInterface::setSize( ci::Vec2i size )
 	{
-		// TODO: is there a cinder specific way to get this, without tying into GwenInput?
-		
+		mCanvas->SetSize( size.x, size.y );
 	}
 
-	void GetDesktopSize( int & w, int & h )
+	void GwenInterface::draw()
 	{
-		ci::DisplayRef display = ci::app::getWindow()->getDisplay();
-		w = display->getWidth();
-		h = display->getHeight();
+		mCanvas->RenderCanvas();
 	}
+	
+} // namespace cigwen
 
-	UnicodeString GetClipboardText()
-	{
-		return L""; // TODO
-	}
 
-	bool SetClipboardText( const UnicodeString & str )
-	{
-		return false; // TODO
-	}
-
-	float GetTimeInSeconds()
-	{
-		return ci::app::getElapsedSeconds();
-	}
-
-	bool FileOpen( const String & Name, const String & StartPath, const String & Extension, Gwen::Event::Handler* pHandler, Event::Handler::FunctionWithInformation fnCallback )
-	{
-//		ci::app::getOpenFilePath();
-		return false; // TODO
-	}
-
-	bool FileSave( const String & Name, const String & StartPath, const String & Extension, Gwen::Event::Handler* pHandler, Event::Handler::FunctionWithInformation fnCallback )
-	{
-		return false; // TODO
-	}
-
-	bool FolderOpen( const String & Name, const String & StartPath, Gwen::Event::Handler* pHandler, Event::Handler::FunctionWithInformation fnCallback )
-	{
-		return false; // TODO
-	}
-
-	void *CreatePlatformWindow( int x, int y, int w, int h, const Gwen::String & strWindowTitle )
-	{
-		return NULL; // TODO
-	}
-
-	void DestroyPlatformWindow( void* pPtr )
-	{
-		// TODO
-	}
-
-	void SetBoundsPlatformWindow( void* pPtr, int x, int y, int w, int h )
-	{
-		// TODO
-	}
-
-	void MessagePump( void* pWindow, Gwen::Controls::Canvas* ptarget )
-	{
-		 // TODO
-	}
-
-	bool HasFocusPlatformWindow( void* pPtr )
-	{
-		return false; // TODO
-	}
-
-	void SetWindowMaximized( void* pPtr, bool bMaximized, Gwen::Point & pNewPos, Gwen::Point & pNewSize )
-	{
-		 // TODO
-	}
-
-	void SetWindowMinimized( void* pPtr, bool bMinimized )
-	{
-		 // TODO
-	}
-
-} } // namespace Gwen::Platform

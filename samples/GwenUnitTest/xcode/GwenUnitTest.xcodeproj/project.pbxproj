@@ -40,6 +40,7 @@
 		1141FC0416F806F100588A46 /* TreeControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1141FBEA16F806F100588A46 /* TreeControl.cpp */; };
 		1141FC0516F806F100588A46 /* UnitTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1141FBEB16F806F100588A46 /* UnitTest.cpp */; };
 		1141FC0616F806F100588A46 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1141FBEC16F806F100588A46 /* Window.cpp */; };
+		118381D2171A08B000864DB0 /* GwenPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 118381D1171A08B000864DB0 /* GwenPlatform.cpp */; };
 		13612C07A7C24270B01BEDE2 /* Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D74F22CEE0641198FE7A246 /* Base.cpp */; };
 		172FA1DE55EB4A4FA8A466D6 /* GwenInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 24AB2294590C490781295A9E /* GwenInput.cpp */; };
 		17642B53ED0B44E5A28A014C /* HSVColorPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8CEF7A1EA2145C1BF0C1978 /* HSVColorPicker.cpp */; };
@@ -162,6 +163,7 @@
 		1141FBEB16F806F100588A46 /* UnitTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UnitTest.cpp; path = ../../../gwen/gwen/UnitTest/UnitTest.cpp; sourceTree = SOURCE_ROOT; };
 		1141FBEC16F806F100588A46 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Window.cpp; path = ../../../gwen/gwen/UnitTest/Window.cpp; sourceTree = SOURCE_ROOT; };
 		1141FC0716F8072000588A46 /* UnitTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UnitTest.h; path = ../../../gwen/gwen/include/Gwen/UnitTest/UnitTest.h; sourceTree = SOURCE_ROOT; };
+		118381D1171A08B000864DB0 /* GwenPlatform.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = GwenPlatform.cpp; path = ../../../src/cigwen/GwenPlatform.cpp; sourceTree = "<group>"; };
 		127A0413B4084C339548FE73 /* LabelClickable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LabelClickable.h; path = ../../../gwen/gwen/include/Gwen/Controls/LabelClickable.h; sourceTree = "<group>"; };
 		1371EF23A6B14FF8BE6D9DE9 /* ResizableControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ResizableControl.h; path = ../../../gwen/gwen/include/Gwen/Controls/ResizableControl.h; sourceTree = "<group>"; };
 		16C901AE064F4889B63B8012 /* SplitterBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SplitterBar.h; path = ../../../gwen/gwen/include/Gwen/Controls/SplitterBar.h; sourceTree = "<group>"; };
@@ -250,7 +252,7 @@
 		80A1035934A74074B6F32B51 /* ImportExport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImportExport.h; path = ../../../gwen/gwen/include/Gwen/Util/ImportExport.h; sourceTree = "<group>"; };
 		81ADDC2304D3455A9FDB6AE7 /* ImagePanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = ImagePanel.cpp; path = ../../../gwen/gwen/src/Controls/ImagePanel.cpp; sourceTree = "<group>"; };
 		822DC3F38B274BBAA677D721 /* MenuItem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = MenuItem.cpp; path = ../../../gwen/gwen/src/Controls/MenuItem.cpp; sourceTree = "<group>"; };
-		823C09756760470ABE184868 /* CinderGwen.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = CinderGwen.cpp; path = ../../../src/cigwen/CinderGwen.cpp; sourceTree = "<group>"; };
+		823C09756760470ABE184868 /* CinderGwen.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; name = CinderGwen.cpp; path = ../../../src/cigwen/CinderGwen.cpp; sourceTree = "<group>"; };
 		8622DDD0B6A14AF1AD08DBDA /* Texturing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Texturing.h; path = ../../../gwen/gwen/include/Gwen/Skins/Texturing.h; sourceTree = "<group>"; };
 		8A6150AB136C47F8ADC4361E /* PropertyTree.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = PropertyTree.cpp; path = ../../../gwen/gwen/src/Controls/PropertyTree.cpp; sourceTree = "<group>"; };
 		8A6C18F397C5486581A00A75 /* ColorControls.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = ColorControls.cpp; path = ../../../gwen/gwen/src/Controls/ColorControls.cpp; sourceTree = "<group>"; };
@@ -781,6 +783,7 @@
 				823C09756760470ABE184868 /* CinderGwen.cpp */,
 				24AB2294590C490781295A9E /* GwenInput.cpp */,
 				197B75C65286425E91E9676E /* GwenRendererGl.cpp */,
+				118381D1171A08B000864DB0 /* GwenPlatform.cpp */,
 			);
 			name = cigwen;
 			sourceTree = "<group>";
@@ -943,6 +946,7 @@
 				1141FC0416F806F100588A46 /* TreeControl.cpp in Sources */,
 				1141FC0516F806F100588A46 /* UnitTest.cpp in Sources */,
 				1141FC0616F806F100588A46 /* Window.cpp in Sources */,
+				118381D2171A08B000864DB0 /* GwenPlatform.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

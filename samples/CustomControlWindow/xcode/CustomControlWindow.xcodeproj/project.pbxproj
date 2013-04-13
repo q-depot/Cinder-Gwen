@@ -15,6 +15,7 @@
 		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
 		075D3511F09F4D01B6CD4D60 /* WindowControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 81E2BC91DD8649E5A5F4668C /* WindowControl.cpp */; };
 		080240D96C584AF4871C62CB /* ComboBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D84CF40867514E15826CDDF4 /* ComboBox.cpp */; };
+		118381D01719F76000864DB0 /* GwenPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 118381CF1719F76000864DB0 /* GwenPlatform.cpp */; };
 		11E59A8A16F8171E00C59A3D /* CustomControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11E59A8816F8171E00C59A3D /* CustomControl.cpp */; };
 		20639DBA151E4D149728D284 /* Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2279DFAA9F17423DB9753D8A /* Base.cpp */; };
 		2DD563285D0948FBA9668849 /* FileOpen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCDBBC2999D845EFB9B5D503 /* FileOpen.cpp */; };
@@ -114,6 +115,7 @@
 		0FBAC54A9DB54D13BC042C0C /* Canvas.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Canvas.h; path = ../../../gwen/gwen/include/Gwen/Controls/Canvas.h; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		10AA3B260CD549A589F48DD1 /* DragAndDrop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DragAndDrop.h; path = ../../../gwen/gwen/include/Gwen/DragAndDrop.h; sourceTree = "<group>"; };
+		118381CF1719F76000864DB0 /* GwenPlatform.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = GwenPlatform.cpp; path = ../../../src/cigwen/GwenPlatform.cpp; sourceTree = "<group>"; };
 		11E59A8816F8171E00C59A3D /* CustomControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CustomControl.cpp; path = ../src/CustomControl.cpp; sourceTree = "<group>"; };
 		11E59A8916F8171E00C59A3D /* CustomControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomControl.h; path = ../src/CustomControl.h; sourceTree = "<group>"; };
 		13C35750C3FC413EB3170F3C /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Macros.h; path = ../../../gwen/gwen/include/Gwen/Macros.h; sourceTree = "<group>"; };
@@ -250,7 +252,7 @@
 		D389944E0A8C4DE086D4941F /* BaseRender.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = BaseRender.cpp; path = ../../../gwen/gwen/src/BaseRender.cpp; sourceTree = "<group>"; };
 		D3C4C576CA73448CAF1A88E8 /* Button.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Button.h; path = ../../../gwen/gwen/include/Gwen/Controls/Button.h; sourceTree = "<group>"; };
 		D498F20F3A8746698A539DA3 /* ToolTip.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.cpp; name = ToolTip.cpp; path = ../../../gwen/gwen/src/ToolTip.cpp; sourceTree = "<group>"; };
-		D49FEA6F6B3047369440E7F1 /* CinderGwen.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; name = CinderGwen.cpp; path = ../../../src/cigwen/CinderGwen.cpp; sourceTree = "<group>"; };
+		D49FEA6F6B3047369440E7F1 /* CinderGwen.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; name = CinderGwen.cpp; path = ../../../src/cigwen/CinderGwen.cpp; sourceTree = "<group>"; };
 		D576C97207D34E68A57895C7 /* Menu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = ../../../gwen/gwen/include/Gwen/Controls/Menu.h; sourceTree = "<group>"; };
 		D5A6C5019D454086AFC369EB /* Modal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Modal.h; path = ../../../gwen/gwen/include/Gwen/Controls/Modal.h; sourceTree = "<group>"; };
 		D62A3AF7F4C843699C265497 /* RichLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RichLabel.h; path = ../../../gwen/gwen/include/Gwen/Controls/RichLabel.h; sourceTree = "<group>"; };
@@ -401,12 +403,13 @@
 		1E76F248C11D4DD4B3E16DFE /* cigwen */ = {
 			isa = PBXGroup;
 			children = (
-				D64B90EBFC4F46BDB0189D80 /* CinderGwen.h */,
-				1E65BFDA27A34494BA7087F1 /* GwenInput.h */,
-				36EB3266C7DC423C850EE6FA /* GwenRendererGl.h */,
 				D49FEA6F6B3047369440E7F1 /* CinderGwen.cpp */,
+				D64B90EBFC4F46BDB0189D80 /* CinderGwen.h */,
 				147F93A01EA249FCB8A91235 /* GwenInput.cpp */,
+				1E65BFDA27A34494BA7087F1 /* GwenInput.h */,
 				E446164C205542559DC4FF3B /* GwenRendererGl.cpp */,
+				36EB3266C7DC423C850EE6FA /* GwenRendererGl.h */,
+				118381CF1719F76000864DB0 /* GwenPlatform.cpp */,
 			);
 			name = cigwen;
 			sourceTree = "<group>";
@@ -415,11 +418,11 @@
 			isa = PBXGroup;
 			children = (
 				01B97315FEAEA392516A2CEA /* Blocks */,
-				29B97315FDCFA39411CA2CEA /* Headers */,
-				080E96DDFE201D6D7F000001 /* Source */,
-				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				29B97315FDCFA39411CA2CEA /* Headers */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				080E96DDFE201D6D7F000001 /* Source */,
 			);
 			name = CustomControlWindow;
 			sourceTree = "<group>";
@@ -834,6 +837,7 @@
 				D670621A7E7E4A21ABCCE5B1 /* FolderOpen.cpp in Sources */,
 				B78E17E2DC23451CB01769E5 /* Query.cpp in Sources */,
 				11E59A8A16F8171E00C59A3D /* CustomControl.cpp in Sources */,
+				118381D01719F76000864DB0 /* GwenPlatform.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

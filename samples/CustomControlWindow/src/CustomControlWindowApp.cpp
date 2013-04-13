@@ -2,16 +2,15 @@
 #include "cinder/gl/gl.h"
 #include "cinder/Rand.h"
 
-#include "cigwen/GwenRendererGl.h"
-#include "cigwen/GwenInput.h"
 #include "cigwen/CinderGwen.h"
 
-#include "Gwen/Skins/Simple.h"
-#include "Gwen/Skins/TexturedBase.h"
 #include "Gwen/Controls/Button.h"
 #include "Gwen/Controls/WindowControl.h"
 
 #include "CustomControl.h"
+
+#define SKIN_NAME "DefaultSkin.png"
+//#define SKIN_NAME "obscureskin.png"
 
 using namespace ci;
 using namespace ci::app;
@@ -23,17 +22,10 @@ class CustomControlWindowApp : public AppNative {
 	void setup();
 	void draw();
 
-	void buttonPressed( Gwen::Controls::Button *button );
-
 private:
-	void addControls();
+	void buttonPressed();
 
-	cigwen::GwenRendererGl *mRenderer;
-	cigwen::GwenInputRef mGwenInput;
-	Gwen::Controls::Canvas *mCanvas;
-
-	cigwen::ControlCallback<Gwen::Controls::Button> mButtonCallback;
-	cigwen::ControlCallback<Gwen::Controls::Button> mButtonCallback2;
+	cigwen::GwenInterfaceRef mGwenInterface;
 };
 
 void CustomControlWindowApp::prepareSettings( Settings *settings )
@@ -53,50 +45,40 @@ void CustomControlWindowApp::setup()
 #endif
 	addAssetDirectory( rootPath / "assets" );
 
-	mRenderer = new cigwen::GwenRendererGl();
-	mRenderer->Init();
+	mGwenInterface = cigwen::GwenInterface::create( loadAsset( SKIN_NAME ) );
 
-	Gwen::Skin::TexturedBase* skin = new Gwen::Skin::TexturedBase( mRenderer );
-	skin->Init( "DefaultSkin.png" );
-//	skin->Init( "obscureskin.png" );
 
-	mCanvas = new Gwen::Controls::Canvas( skin );
-	mCanvas->SetSize( 998, 650 - 24 );
-	mCanvas->SetDrawBackground( true );
-	mCanvas->SetBackgroundColor( cigwen::toGwen( Color::gray( 0.2f ) ) );
-
-	mGwenInput = cigwen::GwenInput::create( mCanvas );
-
-	addControls();
-}
-
-void CustomControlWindowApp::addControls()
-{
-	Gwen::Controls::Button *btn = new Gwen::Controls::Button( mCanvas );
+	// add controls:
+	
+	Gwen::Controls::Button *btn = new Gwen::Controls::Button( mGwenInterface->getCanvas() );
 	btn->SetBounds( getWindowCenter().x - 40, getWindowCenter().y - 20, 80, 40 );
 	btn->SetText( "Click Me" );
-	btn->AddAccelerator( "x" );
+	btn->AddAccelerator( "x" ); // hit key x to trigger this
 
-	Gwen::Controls::Button *btn2 = new Gwen::Controls::Button( mCanvas );
-	//btn->SetBounds( getWindowCenter().x - 40, getWindowCenter().y - 20, 80, 40 );
+	Gwen::Controls::Button *btn2 = new Gwen::Controls::Button( mGwenInterface->getCanvas() );
 	btn2->SetBounds( btn->X(), btn->Bottom() + 10, 80, 40 );
 	btn2->SetText( "Me too" );
-	btn2->AddAccelerator( "c" );
+	btn2->AddAccelerator( "c" ); // hit key c to trigger this
 
-	//btn->onPress.Add( this, &CustomControlWindowApp::buttonPressed ); // NOTE: you could do this too, but be careful with multiple inheritance
-	mButtonCallback.set( btn, bind( &CustomControlWindowApp::buttonPressed, this, std::_1 ) );
-	mButtonCallback2.set( btn2, [&] ( Gwen::Controls::Button *ctl ) {
-		//btn2->SetText( "Thanks!" ); // ???: down she blows.. btn2 has been invalidated, but it should be here by reference..
-		ctl->SetText( "Thanks!" );  // .. but this one works
+	// ???: ambiguous?
+	//	mGwenInterface->addCallback( &btn->onPress, bind( &CustomControlWindowApp::buttonPressed, this ) );
+
+	mGwenInterface->addCallback( &btn->onPress, [&] {
+ 		console() << "btn onPress callback" << endl;
+	} );
+
+	// FIXME: adding this blocks the first callback
+	mGwenInterface->addCallback( &btn2->onPress, [&] ( Gwen::Controls::Base *ctl ) {
+		dynamic_cast<Gwen::Controls::Button *>( ctl )->SetText( "Thanks!" );
 		console() << "btn2 onPress callback" << endl;
 	} );
 }
 
-void CustomControlWindowApp::buttonPressed( Gwen::Controls::Button* button )
+void CustomControlWindowApp::buttonPressed()
 {
 	console() << "button pressed" << endl;
 
-	auto window = new Gwen::Controls::WindowControl( mCanvas );
+	auto window = new Gwen::Controls::WindowControl( mGwenInterface->getCanvas() );
 	window->SetTitle( "This is CustomControl" );
 	window->SetSize( 300, 400 );
 	window->SetPos( randInt( 50, 450 ), randInt( 50, 250 ) );
@@ -111,7 +93,7 @@ void CustomControlWindowApp::buttonPressed( Gwen::Controls::Button* button )
 void CustomControlWindowApp::draw()
 {
 	gl::clear();
-	mCanvas->RenderCanvas();
+	mGwenInterface->draw();
 }
 
 CINDER_APP_NATIVE( CustomControlWindowApp, RendererGl )
