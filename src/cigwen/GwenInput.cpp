@@ -19,60 +19,63 @@ namespace cigwen {
 		window->connectMouseWheel( &GwenInput::mouseWheel, this );
 		window->connectKeyDown( &GwenInput::keyDown, this );
 		window->connectKeyUp( &GwenInput::keyUp, this );
+        
+        mIsPassThrough = false;
 	}
 
 	void GwenInput::mouseDown( app::MouseEvent &event )
 	{
-		if( mCanvas->InputMouseButton( 0, true ) )
-			event.setHandled();
+		if( mCanvas->InputMouseButton( 0, true ) && !mIsPassThrough )
+            event.setHandled();
 	}
 
 	void GwenInput::mouseDrag( app::MouseEvent &event )
 	{
-		if( mCanvas->InputMouseMoved( event.getX(), event.getY(), event.getX() - mMousePos.x, event.getY() - mMousePos.y ) )
-			event.setHandled();
+		if( mCanvas->InputMouseMoved( event.getX(), event.getY(), event.getX() - mMousePos.x, event.getY() - mMousePos.y ) && !mIsPassThrough )
+            event.setHandled();
 		mMousePos = event.getPos();
 	}
 
 	void GwenInput::mouseUp( app::MouseEvent &event )
 	{
 		if( mCanvas->InputMouseButton( 0, false ) )
-			event.setHandled();
+            event.setHandled();
 	}
 
 	void GwenInput::mouseMove( app::MouseEvent &event )
 	{
-		if( mCanvas->InputMouseMoved( event.getX(), event.getY(), event.getX() - mMousePos.x, event.getY() - mMousePos.y ) )
-			event.setHandled();
+		if( mCanvas->InputMouseMoved( event.getX(), event.getY(), event.getX() - mMousePos.x, event.getY() - mMousePos.y ) && !mIsPassThrough )
+            event.setHandled();
 		mMousePos = event.getPos();
 	}
 
 	void GwenInput::mouseWheel( app::MouseEvent &event )
 	{
-		if( mCanvas->InputMouseWheel( event.getWheelIncrement() * mMouseWheelMultiplier ) )
-			event.setHandled();
+		if( mCanvas->InputMouseWheel( event.getWheelIncrement() * mMouseWheelMultiplier ) && !mIsPassThrough )
+            event.setHandled();
 	}
 
 	void GwenInput::keyDown( app::KeyEvent &event )
 	{
 		int key = mapToGwen( event );
-		if( key != -1 && mCanvas->InputKey( key, true ) ) {
-			event.setHandled();
+		if( key != -1 && mCanvas->InputKey( key, true ) )
+        {
+            if ( !mIsPassThrough )
+                event.setHandled();
+            
 			return;
 		}
 
 		// key must be a char..
-		if( mCanvas->InputCharacter( event.getChar() ) )
+		if( mCanvas->InputCharacter( event.getChar() ) && !mIsPassThrough )
 			event.setHandled();
 	}
 
 	void GwenInput::keyUp( app::KeyEvent &event )
 	{
 		int key = mapToGwen( event );
-		if( key != -1 && mCanvas->InputKey( key, false ) ) {
+		if( key != -1 && mCanvas->InputKey( key, false ) && !mIsPassThrough )
 			event.setHandled();
-			return;
-		}
 	}
 
 	int GwenInput::mapToGwen( const app::KeyEvent &event ) const

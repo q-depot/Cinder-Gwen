@@ -18,6 +18,9 @@ namespace cigwen {
 		void	setMouseWheelMultiplier( int m )	{ mMouseWheelMultiplier = m; }
 		int		getMouseWheelMultiplier() const		{ return mMouseWheelMultiplier; }
 
+        bool isPassThrough()                        { return mIsPassThrough; }
+        void setPassThrough( bool val = true )      { mIsPassThrough = val; }
+        
 	protected:
 		// signal callbacks for ci::app events:
 		void mouseDown( ci::app::MouseEvent &event );
@@ -33,9 +36,10 @@ namespace cigwen {
 
 		int mapToGwen( const ci::app::KeyEvent &event ) const;
 
-		Gwen::Controls::Canvas *mCanvas;
-		ci::Vec2i mMousePos;
-		int mMouseWheelMultiplier;
+		Gwen::Controls::Canvas      *mCanvas;
+		ci::Vec2i                   mMousePos;
+		int                         mMouseWheelMultiplier;
+        bool                        mIsPassThrough;
 	};
 	
 } // namespace cigwen
