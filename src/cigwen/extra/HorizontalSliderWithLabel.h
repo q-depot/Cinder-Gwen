@@ -10,8 +10,10 @@ class HorizontalSliderWithLabel : public Gwen::Controls::Base {
     
 public:
     
-    HorizontalSliderWithLabel( std::string name, Gwen::Controls::Base *parent ) : Gwen::Controls::Base(parent)
+    HorizontalSliderWithLabel( std::string name, float *var, Gwen::Controls::Base *parent ) : Gwen::Controls::Base(parent)
     {
+        mVar = var;
+        
         SetHeight( 50 );
         
         // Param name
@@ -47,17 +49,24 @@ public:
         mSlider->SetRange( min, max );
     }
     
+    void Render( Gwen::Skin::Base* skin )
+    {
+        mSlider->SetFloatValue( *mVar );
+    }
+    
 private:
     
     void onChange( Gwen::Controls::Base* pControl )
     {
-        mValueLabel->SetText( std::to_string( ((Gwen::Controls::Slider*)pControl)->GetFloatValue() ) );
+        float val = ((Gwen::Controls::Slider*)pControl)->GetFloatValue();
+        mValueLabel->SetText( std::to_string( val ) );
+        *mVar = val;
     }
     
 private:
     
     Gwen::Controls::HorizontalSlider    *mSlider;
     Gwen::Controls::Label               *mValueLabel;
-
+    float                               *mVar;
 };
 
