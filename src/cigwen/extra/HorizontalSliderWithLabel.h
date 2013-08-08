@@ -14,7 +14,7 @@ public:
     {
         mVar = var;
         
-        SetHeight( 50 );
+        SetSize( 200, 40 );
         
         // Param name
         Gwen::Controls::Label *pLabel = new Gwen::Controls::Label( this );
@@ -26,7 +26,7 @@ public:
         mValueLabel = new Gwen::Controls::Label( this );
         mValueLabel->SetText( "0.0" );
         mValueLabel->SetHeight( 15 );
-        mValueLabel->Dock( Gwen::Pos::Top );
+        mValueLabel->SetBounds( GetSize().x - 60, 0, 60, 20 );
         mValueLabel->SetTextColorOverride( cigwen::toGwen( ci::Color::gray( 0.3f ) ) );
         
         // Slider
