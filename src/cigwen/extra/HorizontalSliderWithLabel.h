@@ -21,13 +21,13 @@ public:
         pLabel->SetText( name );
         pLabel->SetHeight( 15 );
         pLabel->Dock( Gwen::Pos::Top );
-        pLabel->SetTextColorOverride( cigwen::toGwen( ci::Color::gray( 0.3f ) ) );
+        pLabel->SetTextColorOverride( cigwen::toGwen( ci::Color::gray( 0.8f ) ) );
 
         mValueLabel = new Gwen::Controls::Label( this );
         mValueLabel->SetText( "0.0" );
         mValueLabel->SetHeight( 15 );
         mValueLabel->SetBounds( GetSize().x - 60, 0, 60, 20 );
-        mValueLabel->SetTextColorOverride( cigwen::toGwen( ci::Color::gray( 0.3f ) ) );
+        mValueLabel->SetTextColorOverride( cigwen::toGwen( ci::Color::gray( 0.5f ) ) );
         
         // Slider
         mSlider = new Gwen::Controls::HorizontalSlider( this );
