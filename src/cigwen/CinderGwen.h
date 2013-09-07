@@ -5,6 +5,9 @@
 
 #include "cinder/Rect.h"
 #include "Gwen/Structures.h"
+#include "Gwen/Events.h"
+
+#include <functional>
 
 namespace cigwen {
 
@@ -13,5 +16,28 @@ namespace cigwen {
 
 	inline ci::Vec2f fromGwen( const Gwen::Point &p )	{ return ci::Vec2f( p.x, p.y ); }
 	inline ci::Rectf fromGwen( const Gwen::Rect &r )	{ return ci::Rectf( r.x, r.y, r.x + r.w, r.y + r.h ); }
+
+	//! Helper class that maintains a std::function callback for a Gwen control
+	struct ControlCallback : public Gwen::Event::Handler {
+		typedef std::function<void ()> Callback;
+		typedef std::function<void ( Gwen::Controls::Base *control  )> ParamCallback;
+
+		ControlCallback() {}
+		ControlCallback( Gwen::Event::Caller *caller, Callback cb )			{ set( caller, cb ); }
+		ControlCallback( Gwen::Event::Caller *caller, ParamCallback cb )	{ set( caller, cb ); }
+
+		void set( Gwen::Event::Caller *caller, Callback cb )		{ caller->Add( this, &ControlCallback::onEvent ); mCallback = cb; }
+		void set( Gwen::Event::Caller *caller, ParamCallback cb )	{ caller->Add( this, &ControlCallback::onEventWithParam ); mParamCallback = cb; }
+
+		void onEvent()			{
+			mCallback();
+		}
+		void onEventWithParam( Gwen::Controls::Base *control )	{
+			mParamCallback( control );
+		}
+	private:
+		Callback mCallback;
+		ParamCallback mParamCallback;
+	};
 
 } // namespace cigwen

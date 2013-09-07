@@ -17,19 +17,23 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-class CustomControlWindowApp : public AppNative, public Gwen::Event::Handler {
+class CustomControlWindowApp : public AppNative {
   public:
 	void prepareSettings( Settings *settings );
 	void setup();
 	void draw();
 
+	void buttonPressed( Gwen::Controls::Button *button );
+
 private:
 	void addControls();
-	void buttonPressed( Gwen::Controls::Base *button );
 
 	cigwen::GwenRendererGl *mRenderer;
 	cigwen::GwenInputRef mGwenInput;
 	Gwen::Controls::Canvas *mCanvas;
+
+	cigwen::ControlCallback<Gwen::Controls::Button> mButtonCallback;
+	cigwen::ControlCallback<Gwen::Controls::Button> mButtonCallback2;
 };
 
 void CustomControlWindowApp::prepareSettings( Settings *settings )
@@ -59,7 +63,7 @@ void CustomControlWindowApp::setup()
 	mCanvas = new Gwen::Controls::Canvas( skin );
 	mCanvas->SetSize( 998, 650 - 24 );
 	mCanvas->SetDrawBackground( true );
-	mCanvas->SetBackgroundColor( cigwen::toGwen( Color::gray( 0.2 ) ) );
+	mCanvas->SetBackgroundColor( cigwen::toGwen( Color::gray( 0.2f ) ) );
 
 	mGwenInput = cigwen::GwenInput::create( mCanvas );
 
@@ -71,17 +75,28 @@ void CustomControlWindowApp::addControls()
 	Gwen::Controls::Button *btn = new Gwen::Controls::Button( mCanvas );
 	btn->SetBounds( getWindowCenter().x - 40, getWindowCenter().y - 20, 80, 40 );
 	btn->SetText( "Click Me" );
-	btn->onPress.Add( this, &CustomControlWindowApp::buttonPressed );
 	btn->AddAccelerator( "x" );
+
+	Gwen::Controls::Button *btn2 = new Gwen::Controls::Button( mCanvas );
+	//btn->SetBounds( getWindowCenter().x - 40, getWindowCenter().y - 20, 80, 40 );
+	btn2->SetBounds( btn->X(), btn->Bottom() + 10, 80, 40 );
+	btn2->SetText( "Me too" );
+	btn2->AddAccelerator( "c" );
+
+	//btn->onPress.Add( this, &CustomControlWindowApp::buttonPressed ); // NOTE: you could do this too, but be careful with multiple inheritance
+	mButtonCallback.set( btn, bind( &CustomControlWindowApp::buttonPressed, this, std::_1 ) );
+	mButtonCallback2.set( btn2, [&] ( Gwen::Controls::Button *ctl ) {
+		//btn2->SetText( "Thanks!" ); // ???: down she blows.. btn2 has been invalidated, but it should be here by reference..
+		ctl->SetText( "Thanks!" );  // .. but this one works
+		console() << "btn2 onPress callback" << endl;
+	} );
 }
 
-void CustomControlWindowApp::buttonPressed( Gwen::Controls::Base* button )
+void CustomControlWindowApp::buttonPressed( Gwen::Controls::Button* button )
 {
-	// FIXME: crash on windows..
 	console() << "button pressed" << endl;
-	return;
 
-	auto window = new Gwen::Controls::WindowControl( mCanvas );  // .... or this throws a bad alloc
+	auto window = new Gwen::Controls::WindowControl( mCanvas );
 	window->SetTitle( "This is CustomControl" );
 	window->SetSize( 300, 400 );
 	window->SetPos( randInt( 50, 450 ), randInt( 50, 250 ) );
